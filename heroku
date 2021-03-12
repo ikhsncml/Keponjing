@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 # error precaution.
 set -e
 # default unzip folder.
@@ -34,11 +35,7 @@ _get_ziplink () {
 
 _startbot () {
     cd $DIR/*
-    echo "
-
-        >><< --- >><< ---=>  Starting [X]  <=--- >><< --- >><<
-
-    "
+    echo -e "\n\n   >><< --- >><< ---=>  Starting [X]  <=--- >><< --- >><<\n\n"
     sleep 5
     bash run
 }
@@ -46,14 +43,15 @@ _startbot () {
 setup_repo () {
     local zippath
     zippath="app/temp.zip"
-    echo -e "--->  Fetching Update from Upstream Repo ...\n\n"
+    echo -e "--->  Fetching Update from Upstream Repo ...\n"
     wget -q $(_get_ziplink) -O "$zippath"
+    echo -e "      Done\n"
     echo "--->  Unpacking Data ..."
     unzip -qq "$zippath" -d "$DIR"
-    echo -e "Done\n\n"
+    echo -e "      Done\n"
     echo "--->  Cleaning ..."
     rm -rf "$zippath"
-    echo "Done"
+    echo "      Done"
     sleep 2
     _startbot
 }
